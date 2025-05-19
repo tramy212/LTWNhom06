@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard Chấm công - Ms.Vy English
+{% endblock %}
+
+{% block content %}
+<!-- Redirected to daily_attendance_form -->
+<script>
+    window.location.href = '{% url 'attendance:daily_attendance_form' %}';
+</script>
+{% endblock %}
