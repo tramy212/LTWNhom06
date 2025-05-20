@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}{{ title }}{% endblock %}
+{% block title %}{% if contract %}Cập nhật hợp đồng{% else %}Thêm hợp đồng{% endif %}{% endblock %}
 
 {% block sidebar %}
 <div class="col-md-3 col-lg-2 d-md-block sidebar collapse">
@@ -13,10 +13,14 @@
 
 {% block content %}
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">{{ title }}</h1>
+    <h1 class="h2">{% if contract %}Cập nhật hợp đồng{% else %}Thêm hợp đồng{% endif %}</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
-        {% if employee_id %}
-        <a href="{% url 'employee_detail' employee_id %}" class="btn btn-sm btn-secondary">
+        {% if contract %}
+        <a href="{% url 'contract_detail' contract.id %}" class="btn btn-sm btn-secondary">
+            <i class="bi bi-arrow-left"></i> Quay lại
+        </a>
+        {% elif employee %}
+        <a href="{% url 'employee_detail' employee.id %}" class="btn btn-sm btn-secondary">
             <i class="bi bi-arrow-left"></i> Quay lại
         </a>
         {% else %}
@@ -27,87 +31,92 @@
     </div>
 </div>
 
-<div class="card">
+{% if employee %}
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Thông tin nhân viên</h5>
+    </div>
     <div class="card-body">
-        <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Mã nhân viên:</strong> {{ employee.code }}</p>
+                <p><strong>Họ và tên:</strong> {{ employee.full_name }}</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Vị trí:</strong> {{ employee.position.name }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% elif not contract %}
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Chọn nhân viên</h5>
+    </div>
+    <div class="card-body">
+        <div class="input-group mb-3">
+            <input type="text" id="employeeSearch" class="form-control" placeholder="Tìm kiếm nhân viên...">
+            <button class="btn btn-outline-secondary" type="button" id="searchButton">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+        <div id="employeeResults" class="list-group">
+            <!-- Kết quả tìm kiếm sẽ hiển thị ở đây -->
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Thông tin hợp đồng</h5>
+    </div>
+    <div class="card-body">
+        <form method="post">
             {% csrf_token %}
-            
-            <!-- Thông tin cơ bản -->
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">Thông tin cơ bản</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{ form.employee|as_crispy_field }}
-                            {% if form.employee_id %}{{ form.employee_id }}{% endif %}
-                            {{ form.contract_number|as_crispy_field }}
-                            {{ form.contract_type|as_crispy_field }}
-                            {{ form.position|as_crispy_field }}
-                        </div>
-                        <div class="col-md-6">
-                            {{ form.status|as_crispy_field }}
-                            {{ form.signed_date|as_crispy_field }}
-                            {{ form.start_date|as_crispy_field }}
-                            {{ form.end_date|as_crispy_field }}
-                        </div>
+            {% if not employee and not contract %}
+            <input type="hidden" name="employee_id" id="selectedEmployeeId">
+            {% endif %}
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="mb-3">Thông tin cơ bản</h5>
+                    {{ form.contract_number|as_crispy_field }}
+                    {{ form.contract_name|as_crispy_field }}
+                    <div id="contract_type_field">
+                        {{ form.contract_type|as_crispy_field }}
                     </div>
+                    {{ form.position|as_crispy_field }}
+                    {{ form.work_form|as_crispy_field }}
+                </div>
+                <div class="col-md-6">
+                    <h5 class="mb-3">Thời gian và lương</h5>
+                    {{ form.sign_date|as_crispy_field }}
+                    {{ form.start_date|as_crispy_field }}
+                    <div id="end_date_field">
+                        {{ form.end_date|as_crispy_field }}
+                    </div>
+                    {{ form.basic_salary|as_crispy_field }}
+                    {{ form.insurance_salary|as_crispy_field }}
+                    {{ form.is_active|as_crispy_field }}
                 </div>
             </div>
-
-            <!-- Thông tin lương -->
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">Thông tin lương</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            {{ form.basic_salary|as_crispy_field }}
-                        </div>
-                        <div class="col-md-4">
-                            {{ form.allowance|as_crispy_field }}
-                        </div>
-                        <div class="col-md-4">
-                            {{ form.insurance_salary|as_crispy_field }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Thông tin khác -->
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">Thông tin khác</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{ form.notes|as_crispy_field }}
-                        </div>
-                        <div class="col-md-6">
-                            {{ form.file|as_crispy_field }}
-                            {% if form.instance.file %}
-                            <div class="alert alert-info">
-                                <i class="bi bi-info-circle me-2"></i>
-                                File hiện tại: {{ form.instance.file.name }}
-                                <a href="{% url 'contract_download' form.instance.id %}" class="btn btn-sm btn-primary ms-2">
-                                    <i class="bi bi-download"></i> Tải xuống
-                                </a>
-                            </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-3">
-                <button type="submit" class="btn btn-primary">Lưu</button>
-                {% if employee_id %}
-                <a href="{% url 'employee_detail' employee_id %}" class="btn btn-secondary">Hủy</a>
+            <div class="d-flex gap-2 mt-3">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save me-1"></i> Lưu
+                </button>
+                {% if contract %}
+                <a href="{% url 'contract_detail' contract.id %}" class="btn btn-secondary">
+                    <i class="bi bi-x-circle me-1"></i> Hủy
+                </a>
+                {% elif employee %}
+                <a href="{% url 'employee_detail' employee.id %}" class="btn btn-secondary">
+                    <i class="bi bi-x-circle me-1"></i> Hủy
+                </a>
                 {% else %}
-                <a href="{% url 'contract_list' %}" class="btn btn-secondary">Hủy</a>
+                <a href="{% url 'contract_list' %}" class="btn btn-secondary">
+                    <i class="bi bi-x-circle me-1"></i> Hủy
+                </a>
                 {% endif %}
             </div>
         </form>
@@ -116,24 +125,98 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Xử lý hiển thị/ẩn trường end_date dựa trên contract_type
-        const contractTypeField = document.getElementById('id_contract_type');
-        const endDateGroup = document.getElementById('div_id_end_date');
-        
-        function updateEndDateVisibility() {
-            if (contractTypeField.value === 'indefinite') {
-                endDateGroup.style.opacity = '0.5';
-                document.getElementById('id_end_date').value = '';
+        // Xử lý ẩn/hiện trường thời gian kết thúc dựa trên loại hợp đồng
+        const contractTypeSelect = document.querySelector('select[name="contract_type"]');
+        const endDateField = document.getElementById('end_date_field');
+
+        function toggleEndDateField() {
+            if (contractTypeSelect.value === 'indefinite') {
+                endDateField.style.display = 'none';
+                // Xóa giá trị ngày kết thúc khi chọn hợp đồng không xác định thời hạn
+                const endDateInput = endDateField.querySelector('input');
+                if (endDateInput) {
+                    endDateInput.value = '';
+                }
             } else {
-                endDateGroup.style.opacity = '1';
+                endDateField.style.display = 'block';
             }
         }
-        
-        // Chạy khi trang tải
-        updateEndDateVisibility();
-        
-        // Chạy khi thay đổi loại hợp đồng
-        contractTypeField.addEventListener('change', updateEndDateVisibility);
+
+        // Kiểm tra ban đầu
+        if (contractTypeSelect) {
+            toggleEndDateField();
+
+            // Thêm sự kiện change
+            contractTypeSelect.addEventListener('change', toggleEndDateField);
+        }
+
+        {% if not employee and not contract %}
+        // Xử lý tìm kiếm nhân viên
+        document.getElementById('searchButton').addEventListener('click', function() {
+            const searchTerm = document.getElementById('employeeSearch').value;
+            if (searchTerm.length < 2) return;
+
+            // Gửi request AJAX để tìm kiếm nhân viên
+            fetch(`/api/employees/search?q=${searchTerm}`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultsDiv = document.getElementById('employeeResults');
+                    resultsDiv.innerHTML = '';
+
+                    if (data.length === 0) {
+                        resultsDiv.innerHTML = '<div class="alert alert-info">Không tìm thấy nhân viên nào.</div>';
+                        return;
+                    }
+
+                    data.forEach(employee => {
+                        const item = document.createElement('a');
+                        item.href = "#";
+                        item.className = 'list-group-item list-group-item-action';
+                        item.dataset.id = employee.id;
+                        item.innerHTML = `
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">${employee.full_name}</h5>
+                                <small>${employee.code}</small>
+                            </div>
+                            <p class="mb-1">${employee.position}</p>
+                        `;
+
+                        item.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            document.getElementById('selectedEmployeeId').value = this.dataset.id;
+                            document.getElementById('employeeSearch').value = employee.full_name;
+                            resultsDiv.innerHTML = '';
+
+                            // Hiển thị thông tin nhân viên đã chọn
+                            const infoDiv = document.createElement('div');
+                            infoDiv.className = 'alert alert-success mt-3';
+                            infoDiv.innerHTML = `
+                                <h5>Nhân viên đã chọn:</h5>
+                                <p><strong>Mã nhân viên:</strong> ${employee.code}</p>
+                                <p><strong>Họ và tên:</strong> ${employee.full_name}</p>
+                                <p><strong>Vị trí:</strong> ${employee.position}</p>
+                            `;
+                            resultsDiv.appendChild(infoDiv);
+                        });
+
+                        resultsDiv.appendChild(item);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('employeeResults').innerHTML =
+                        '<div class="alert alert-danger">Đã xảy ra lỗi khi tìm kiếm nhân viên.</div>';
+                });
+        });
+
+        // Cho phép tìm kiếm khi nhấn Enter
+        document.getElementById('employeeSearch').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('searchButton').click();
+            }
+        });
+        {% endif %}
     });
 </script>
 {% endblock %}

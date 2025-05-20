@@ -13,121 +13,212 @@
 
 {% block content %}
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h2 class="text-center fw-bold">Quản lý hợp đồng</h2>
-    <a href="{% url 'contract_create' %}" class="btn btn-primary">
-        <i class="bi bi-plus-circle me-1"></i> Thêm hợp đồng
-    </a>
+    <h1 class="h2">Danh sách hợp đồng</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.print()">
+                <i class="bi bi-printer me-1"></i> In
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id="exportExcel">
+                <i class="bi bi-download me-1"></i> Xuất Excel
+            </button>
+        </div>
+        <a href="{% url 'contract_create_general' %}" class="btn btn-sm btn-primary">
+            <i class="bi bi-plus me-1"></i> Thêm
+        </a>
+    </div>
 </div>
 
+<!-- Thống kê -->
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title mb-0">Tổng số hợp đồng</h6>
+                        <h2 class="mt-2 mb-0">{{ total_contracts }}</h2>
+                    </div>
+                    <i class="bi bi-file-earmark-text fs-1"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title mb-0">Hợp đồng đang hiệu lực</h6>
+                        <h2 class="mt-2 mb-0">{{ active_contracts }}</h2>
+                    </div>
+                    <i class="bi bi-check-circle fs-1"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-warning text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title mb-0">Hợp đồng sắp hết hạn</h6>
+                        <h2 class="mt-2 mb-0">{{ expiring_contracts }}</h2>
+                    </div>
+                    <i class="bi bi-exclamation-triangle fs-1"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bộ lọc -->
 <div class="card mb-4">
     <div class="card-body">
         <form method="get" class="row g-3">
             <div class="col-md-4">
                 <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Tìm kiếm theo số hợp đồng, tên nhân viên..." value="{{ search_query }}">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="bi bi-search"></i>
+                    {{ filter_form.search }}
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="bi bi-search me-1"></i>
                     </button>
                 </div>
             </div>
-
-            <div class="col-md-4">
-                <select name="status" class="form-select" onchange="this.form.submit()">
-                    <option value="">-- Tất cả trạng thái --</option>
-                    {% for status_code, status_name in contract_statuses %}
-                        <option value="{{ status_code }}" {% if status_filter == status_code %}selected{% endif %}>
-                            {{ status_name }}
-                        </option>
-                    {% endfor %}
-                </select>
+            <div class="col-md-2">
+                {{ filter_form.contract_type }}
+            </div>
+            <div class="col-md-2">
+                {{ filter_form.department }}
+            </div>
+            <div class="col-md-2">
+                {{ filter_form.status }}
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-funnel me-1"></i> Lọc
+                </button>
             </div>
 
-            <div class="col-md-4">
-                <select name="type" class="form-select" onchange="this.form.submit()">
-                    <option value="">-- Tất cả loại hợp đồng --</option>
-                    {% for type_code, type_name in contract_types %}
-                        <option value="{{ type_code }}" {% if type_filter == type_code %}selected{% endif %}>
-                            {{ type_name }}
-                        </option>
-                    {% endfor %}
-                </select>
+            <div class="col-md-3 mt-3">
+                <label class="form-label">Từ ngày:</label>
+                {{ filter_form.date_from }}
+            </div>
+            <div class="col-md-3 mt-3">
+                <label class="form-label">Đến ngày:</label>
+                {{ filter_form.date_to }}
+            </div>
+            <div class="col-md-6 mt-3 text-end">
+                <a href="{% url 'contract_list' %}" class="btn btn-outline-secondary">
+                    <i class="bi bi-x-circle me-1"></i> Xóa bộ lọc
+                </a>
             </div>
         </form>
     </div>
 </div>
 
+<!-- Danh sách hợp đồng -->
 <div class="card">
-    <div class="card-header">
-        <h5 class="card-title mb-0">Danh sách hợp đồng</h5>
-    </div>
     <div class="card-body p-0">
         <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <thead>
+            <table class="table table-striped table-hover mb-0">
+                <thead class="table-light">
                     <tr>
+                        <th width="40px">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="selectAll">
+                            </div>
+                        </th>
+                        <th>Ngày ký HĐ</th>
                         <th>Số hợp đồng</th>
-                        <th>Nhân viên</th>
+                        <th>Họ và tên NLĐ</th>
+                        <th>Vị trí công việc</th>
+                        <th>Đơn vị</th>
                         <th>Loại hợp đồng</th>
-                        <th>Vị trí</th>
-                        <th>Ngày bắt đầu</th>
-                        <th>Ngày kết thúc</th>
-                        <th>Lương cơ bản</th>
+                        <th>Thời hạn</th>
                         <th>Trạng thái</th>
-                        <th>Thao tác</th>
+                        <th width="60px" class="text-center">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for contract in page_obj %}
                     <tr>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="{{ contract.id }}">
+                            </div>
+                        </td>
+                        <td>{{ contract.sign_date|date:"d/m/Y" }}</td>
                         <td>{{ contract.contract_number }}</td>
                         <td>
-                            <a href="{% url 'employee_detail' contract.employee.id %}">
-                                {{ contract.employee.full_name }}
-                            </a>
+                            <div class="d-flex align-items-center">
+                                {% if contract.employee.photo %}
+                                <img src="{{ contract.employee.photo.url }}" alt="{{ contract.employee.full_name }}"
+                                     class="rounded-circle me-2" width="32" height="32">
+                                {% else %}
+                                <div class="avatar me-2" style="background-color:
+                                    {% cycle '#6366F1' '#F59E0B' '#EC4899' '#10B981' '#3B82F6' %};
+                                    width: 32px; height: 32px; border-radius: 50%; display: flex;
+                                    align-items: center; justify-content: center; color: white; font-weight: bold;">
+                                    {{ contract.employee.first_name|first }}{{ contract.employee.last_name|first }}
+                                </div>
+                                {% endif %}
+                                <a href="{% url 'employee_detail' contract.employee.id %}">{{ contract.employee.full_name }}</a>
+                            </div>
                         </td>
-                        <td>{{ contract.get_contract_type_display }}</td>
                         <td>{{ contract.position.name }}</td>
-                        <td>{{ contract.start_date|date:"d/m/Y" }}</td>
-                        <td>{% if contract.end_date %}{{ contract.end_date|date:"d/m/Y" }}{% else %}-{% endif %}</td>
-                        <td>{{ contract.basic_salary|floatformat:0 }} VNĐ</td>
+                        <td>{% if contract.department %}{{ contract.department.name }}{% elif contract.position.department %}{{ contract.position.department.name }}{% else %}Chưa xác định{% endif %}</td>
+                        <td>{{ contract.get_contract_type_display }}</td>
                         <td>
-                            {% if contract.status == 'active' %}
-                            <span class="badge bg-success">Đang hiệu lực</span>
-                            {% elif contract.status == 'expired' %}
-                            <span class="badge bg-warning">Đã hết hạn</span>
-                            {% elif contract.status == 'terminated' %}
-                            <span class="badge bg-danger">Đã chấm dứt</span>
-                            {% elif contract.status == 'pending' %}
-                            <span class="badge bg-info">Chờ ký kết</span>
+                            {% if contract.end_date %}
+                                {{ contract.end_date|date:"d/m/Y" }}
+                            {% else %}
+                                <span class="text-muted">Không xác định</span>
                             {% endif %}
                         </td>
                         <td>
-                            <div class="dropdown">
-                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{ contract.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                            {% if not contract.is_active or contract.end_date and contract.end_date <= today %}
+                                <span class="badge bg-secondary">Hết hiệu lực</span>
+                            {% elif contract.is_expiring %}
+                                <span class="badge bg-warning text-dark">Sắp hết hạn</span>
+                            {% else %}
+                                <span class="badge bg-success">Đang hiệu lực</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center action-column">
+                            <div class="dropdown action-dropdown">
+                                <button class="btn btn-sm action-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bi bi-three-dots"></i>
                                 </button>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton{{ contract.id }}">
-                                    <li><a class="dropdown-item" href="{% url 'contract_detail' contract.id %}"><i class="bi bi-eye me-2"></i>Xem chi tiết</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'contract_update' contract.id %}"><i class="bi bi-pencil me-2"></i>Chỉnh sửa</a></li>
-                                    {% if contract.file %}
-                                    <li><a class="dropdown-item" href="{% url 'contract_download' contract.id %}"><i class="bi bi-download me-2"></i>Tải xuống</a></li>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{% url 'contract_detail' contract.id %}">
+                                        <i class="bi bi-eye me-2"></i>Xem chi tiết
+                                    </a>
+                                    <a class="dropdown-item" href="{% url 'contract_update' contract.id %}">
+                                        <i class="bi bi-pencil me-2"></i>Chỉnh sửa
+                                    </a>
+                                    {% if contract.is_active and not contract.end_date or contract.end_date > today %}
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" href="{% url 'contract_terminate' contract.id %}">
+                                        <i class="bi bi-x-circle me-2"></i>Chấm dứt hợp đồng
+                                    </a>
+                                    {% elif not contract.is_active %}
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" href="{% url 'contract_delete' contract.id %}">
+                                        <i class="bi bi-trash me-2"></i>Xóa hợp đồng
+                                    </a>
                                     {% endif %}
-                                    {% if contract.status == 'active' or contract.status == 'pending' %}
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item text-danger" href="{% url 'contract_terminate' contract.id %}" onclick="return confirm('Bạn có chắc chắn muốn chấm dứt hợp đồng này?')"><i class="bi bi-x-circle me-2"></i>Chấm dứt hợp đồng</a></li>
-                                    {% endif %}
-                                </ul>
+                                </div>
                             </div>
                         </td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="9" class="text-center py-4">
+                        <td colspan="10" class="text-center py-4">
                             <div class="d-flex flex-column align-items-center">
-                                <i class="bi bi-file-earmark-text text-muted" style="font-size: 3rem;"></i>
+                                <i class="bi bi-file-earmark-x text-muted" style="font-size: 3rem;"></i>
                                 <p class="mt-3 mb-0">Không có hợp đồng nào.</p>
-                                <a href="{% url 'contract_create' %}" class="btn btn-primary btn-sm mt-2">
-                                    <i class="bi bi-plus"></i> Thêm hợp đồng mới
+                                <a href="{% url 'contract_create_general' %}" class="btn btn-primary btn-sm mt-2">
+                                    <i class="bi bi-plus me-1"></i> Thêm hợp đồng mới
                                 </a>
                             </div>
                         </td>
@@ -139,6 +230,7 @@
     </div>
 </div>
 
+<!-- Phân trang -->
 {% if page_obj.has_other_pages %}
 <nav aria-label="Page navigation" class="mt-4">
     <ul class="pagination justify-content-center">
@@ -200,4 +292,66 @@
     </ul>
 </nav>
 {% endif %}
+
+<style>
+    /* Đảm bảo menu dropdown hiển thị bên ngoài khung bảng */
+    .table-responsive {
+        overflow: visible !important;
+    }
+
+    /* Định dạng cột thao tác */
+    .action-column {
+        position: relative;
+    }
+
+    /* Định dạng dropdown */
+    .action-dropdown {
+        position: static;
+    }
+
+    /* Định dạng nút thao tác */
+    .action-btn {
+        background: transparent;
+        border: none;
+        color: #6c757d;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .action-btn:hover, .action-btn:focus {
+        color: #000;
+        background-color: rgba(108, 117, 125, 0.1);
+    }
+
+    /* Định dạng menu dropdown */
+    .action-dropdown .dropdown-menu {
+        position: absolute;
+        right: 0;
+        left: auto;
+        z-index: 1000;
+        min-width: 10rem;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Xử lý chọn tất cả
+        const selectAllCheckbox = document.getElementById('selectAll');
+        if (selectAllCheckbox) {
+            selectAllCheckbox.addEventListener('change', function() {
+                const checkboxes = document.querySelectorAll('tbody .form-check-input');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = selectAllCheckbox.checked;
+                });
+            });
+        }
+
+        // Xuất Excel
+        const exportExcelBtn = document.getElementById('exportExcel');
+        if (exportExcelBtn) {
+            exportExcelBtn.addEventListener('click', function() {
+                window.location.href = "{% url 'contract_list' %}?export=excel{% for key, value in request.GET.items %}{% if key != 'export' %}&{{ key }}={{ value }}{% endif %}{% endfor %}";
+            });
+        }
+    });
+</script>
 {% endblock %}
