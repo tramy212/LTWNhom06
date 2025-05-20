@@ -737,10 +737,16 @@ def transfer_to_payroll(request, summary_id):
     # Kiểm tra xem bảng chấm công đã được chuyển sang tính lương chưa
     if attendance_summary.transferred:
         messages.warning(request, 'Bảng chấm công này đã được chuyển sang tính lương trước đó')
-        return redirect('attendance_summary_view', id=summary_id)
+        return redirect('attendance:attendance_summary_view', id=summary_id)
 
     # Lấy dữ liệu nhân viên từ hàm helper để hiển thị trong trang xác nhận
     employee_data = get_attendance_summary_data(summary_id)
+
+    # Gán context trước khi sử dụng trong bất kỳ nhánh nào
+    context = {
+        'attendance_summary': attendance_summary,
+        'employee_data': employee_data,
+    }
 
     if request.method == 'POST':
         # Nếu người dùng đã xác nhận, thực hiện chuyển dữ liệu
@@ -765,36 +771,23 @@ def transfer_to_payroll(request, summary_id):
                 # Tính lương cho từng nhân viên
                 for employee_info in employee_data:
                     employee = employee_info['employee']
-
-                    # Lấy lương cơ bản từ thông tin nhân viên
                     basic_salary = getattr(employee, 'basic_salary', 0) or 0
-
-                    # Lấy thông tin chấm công từ employee_data
                     standard_work_days = employee_info.get('standard_work_days', 0)
                     actual_workdays = employee_info.get('actual_workdays', 0)
                     unpaid_leave = employee_info.get('unpaid_leave', 0)
 
-                    # Xử lý attendance_ratio một cách an toàn
-                    attendance_ratio_raw = employee_info.get('attendance_ratio', 0)
-
-                    # Đảm bảo attendance_ratio là một số hợp lệ
                     try:
-                        attendance_ratio = float(attendance_ratio_raw)
-                        # Đảm bảo tỷ lệ nằm trong khoảng hợp lệ (0-1)
+                        attendance_ratio = float(employee_info.get('attendance_ratio', 0))
                         attendance_ratio = max(0, min(1, attendance_ratio))
                     except (TypeError, ValueError):
                         attendance_ratio = 0
 
-                    # Tính lương theo ngày công
                     try:
                         gross_salary = int(basic_salary * Decimal(str(attendance_ratio)))
                     except Exception:
                         gross_salary = 0
 
-                    # Tính các khoản khấu trừ (giả định 10% tổng thu nhập)
                     deductions_amount = int(gross_salary * Decimal('0.1'))
-
-                    # Tính lương thực lĩnh
                     net_salary = gross_salary - deductions_amount
 
                     PayrollDetail.objects.create(
@@ -810,27 +803,21 @@ def transfer_to_payroll(request, summary_id):
                         net_salary=net_salary
                     )
 
-                # Đánh dấu bảng chấm công đã được chuyển tính lương
                 attendance_summary.transferred = True
                 attendance_summary.save()
 
                 messages.success(request,
                                  f'Đã chuyển dữ liệu từ bảng chấm công "{attendance_summary.name}" sang bảng lương thành công')
 
-                return render(request, 'attendance/transfer_to_payroll.html', context)
+                # Chuyển hướng thay vì render lại template
+                return redirect('attendance:attendance_summary_view', id=summary_id)
             except Exception as e:
                 messages.error(request, f'Lỗi khi chuyển dữ liệu: {str(e)}')
-                return redirect('attendance_summary_view', id=summary_id)
+                return redirect('attendance:attendance_summary_view', id=summary_id)
         else:
             # Người dùng đã hủy thao tác
             messages.info(request, 'Đã hủy thao tác chuyển tính lương')
-            return redirect('attendance_summary_view', id=summary_id)
-
-    # Hiển thị trang xác nhận
-    context = {
-        'attendance_summary': attendance_summary,
-        'employee_data': employee_data,
-    }
+            return redirect('attendance:attendance_summary_view', id=summary_id)
 
     return render(request, 'attendance/transfer_to_payroll.html', context)
 

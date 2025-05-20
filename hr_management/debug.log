@@ -13249,3 +13249,346 @@ INFO 2025-05-20 17:17:51,021 basehttp "GET /employees/them/ HTTP/1.1" 200 26035
 INFO 2025-05-20 17:17:51,753 basehttp "GET /employees/hop-dong/ HTTP/1.1" 200 26201
 INFO 2025-05-20 17:17:56,563 basehttp "GET /attendance/dashboard/ HTTP/1.1" 200 8811
 INFO 2025-05-20 17:17:56,656 basehttp "GET /attendance/daily-attendance/ HTTP/1.1" 200 14720
+INFO 2025-05-21 01:19:44,140 autoreload Watching for file changes with StatReloader
+INFO 2025-05-21 01:19:47,226 basehttp "GET / HTTP/1.1" 200 13111
+INFO 2025-05-21 01:19:49,453 basehttp "GET /attendance/dashboard/ HTTP/1.1" 200 8811
+INFO 2025-05-21 01:19:49,556 basehttp "GET /attendance/daily-attendance/ HTTP/1.1" 200 14720
+INFO 2025-05-21 01:19:54,242 basehttp "GET /attendance/daily-attendance/ HTTP/1.1" 200 14720
+INFO 2025-05-21 01:19:59,247 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12711
+INFO 2025-05-21 01:19:59,944 basehttp "GET /attendance/daily-attendance/ HTTP/1.1" 200 14720
+INFO 2025-05-21 01:20:02,498 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 13385
+INFO 2025-05-21 01:20:05,863 basehttp "GET /attendance/summary/ HTTP/1.1" 200 14618
+INFO 2025-05-21 01:20:07,276 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 13385
+INFO 2025-05-21 01:28:39,533 basehttp "GET /attendance/dashboard/ HTTP/1.1" 200 8811
+INFO 2025-05-21 01:28:39,628 basehttp "GET /attendance/daily-attendance/ HTTP/1.1" 200 14720
+INFO 2025-05-21 01:29:06,507 basehttp "GET /payroll/ HTTP/1.1" 200 11633
+INFO 2025-05-21 01:29:09,954 basehttp "GET /attendance/dashboard/ HTTP/1.1" 200 8811
+INFO 2025-05-21 01:29:10,020 basehttp "GET /attendance/daily-attendance/ HTTP/1.1" 200 14720
+INFO 2025-05-21 01:55:29,166 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12711
+INFO 2025-05-21 01:55:33,018 basehttp "GET /attendance/daily-attendance/ HTTP/1.1" 200 14720
+INFO 2025-05-21 01:55:39,536 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 13385
+INFO 2025-05-21 01:55:43,328 basehttp "GET /attendance/attendance-details/add/ HTTP/1.1" 200 17233
+INFO 2025-05-21 01:55:53,586 basehttp "POST /attendance/attendance-details/add/ HTTP/1.1" 302 0
+INFO 2025-05-21 01:55:53,619 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 14921
+INFO 2025-05-21 01:55:59,242 basehttp "GET /attendance/summary/ HTTP/1.1" 200 14828
+INFO 2025-05-21 01:56:16,369 basehttp "POST /attendance/summary/add/ HTTP/1.1" 302 0
+INFO 2025-05-21 01:56:16,386 basehttp "GET /attendance/summary/ HTTP/1.1" 200 16205
+INFO 2025-05-21 01:56:19,556 basehttp "GET /attendance/summary/1/ HTTP/1.1" 200 13660
+WARNING 2025-05-21 01:56:19,744 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 01:56:21,439 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 14494
+INFO 2025-05-21 01:56:22,242 basehttp "GET /attendance/attendance-details/view/1/ HTTP/1.1" 200 51011
+INFO 2025-05-21 01:56:27,768 basehttp "GET /attendance/daily-attendance/ HTTP/1.1" 200 14720
+INFO 2025-05-21 01:56:32,010 basehttp "GET /attendance/daily-attendance/?selected_date=2025-05-01 HTTP/1.1" 200 14720
+INFO 2025-05-21 01:56:56,914 basehttp "POST /attendance/daily-attendance/?selected_date=2025-05-01 HTTP/1.1" 302 0
+INFO 2025-05-21 01:56:56,931 basehttp "GET /attendance/daily-attendance/ HTTP/1.1" 200 15149
+INFO 2025-05-21 01:57:01,955 basehttp "GET /attendance/daily-attendance/?selected_date=2025-05-02 HTTP/1.1" 200 14720
+INFO 2025-05-21 01:57:20,894 basehttp "POST /attendance/daily-attendance/?selected_date=2025-05-02 HTTP/1.1" 302 0
+INFO 2025-05-21 01:57:20,912 basehttp "GET /attendance/daily-attendance/ HTTP/1.1" 200 15149
+INFO 2025-05-21 01:57:26,275 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 14494
+INFO 2025-05-21 01:57:27,230 basehttp "GET /attendance/attendance-details/view/1/ HTTP/1.1" 200 51615
+INFO 2025-05-21 01:57:37,159 basehttp "GET /attendance/summary/ HTTP/1.1" 200 15776
+INFO 2025-05-21 01:57:38,708 basehttp "GET /attendance/summary/1/ HTTP/1.1" 200 13661
+WARNING 2025-05-21 01:57:38,760 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+ERROR 2025-05-21 01:57:44,399 log Internal Server Error: /attendance/summary/1/transfer/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "E:\LTWNhom06_1\LTWNhom06_1\hr_management\attendance\views.py", line 835, in transfer_to_payroll
+    return render(request, 'attendance/transfer_to_payroll.html', context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'attendance_summary_view' not found. 'attendance_summary_view' is not a valid view function or pattern name.
+ERROR 2025-05-21 01:57:44,404 basehttp "GET /attendance/summary/1/transfer/ HTTP/1.1" 500 179617
+ERROR 2025-05-21 01:57:52,665 log Internal Server Error: /attendance/summary/1/transfer/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "E:\LTWNhom06_1\LTWNhom06_1\hr_management\attendance\views.py", line 835, in transfer_to_payroll
+    return render(request, 'attendance/transfer_to_payroll.html', context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'attendance_summary_view' not found. 'attendance_summary_view' is not a valid view function or pattern name.
+ERROR 2025-05-21 01:57:52,667 basehttp "GET /attendance/summary/1/transfer/ HTTP/1.1" 500 179617
+ERROR 2025-05-21 01:59:08,813 log Internal Server Error: /attendance/summary/1/transfer/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "E:\LTWNhom06_1\LTWNhom06_1\hr_management\attendance\views.py", line 835, in transfer_to_payroll
+    return render(request, 'attendance/transfer_to_payroll.html', context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'attendance_summary_view' not found. 'attendance_summary_view' is not a valid view function or pattern name.
+ERROR 2025-05-21 01:59:08,820 basehttp "GET /attendance/summary/1/transfer/ HTTP/1.1" 500 179617
+INFO 2025-05-21 02:00:18,948 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 14494
+INFO 2025-05-21 02:00:20,955 basehttp "GET /attendance/attendance-details/add/ HTTP/1.1" 200 17233
+INFO 2025-05-21 02:00:23,620 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 14494
+INFO 2025-05-21 02:00:25,851 basehttp "GET /attendance/attendance-details/view/1/ HTTP/1.1" 200 51615
+INFO 2025-05-21 02:00:27,054 basehttp "GET /attendance/attendance-details/export/1/ HTTP/1.1" 200 5529
+INFO 2025-05-21 02:00:31,975 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 14494
+INFO 2025-05-21 02:02:18,505 autoreload E:\LTWNhom06_1\LTWNhom06_1\hr_management\attendance\views.py changed, reloading.
+INFO 2025-05-21 02:02:21,125 autoreload Watching for file changes with StatReloader
+INFO 2025-05-21 02:02:29,941 basehttp "GET /attendance/summary/ HTTP/1.1" 200 15776
+INFO 2025-05-21 02:02:31,872 basehttp "GET /attendance/summary/1/ HTTP/1.1" 200 13661
+WARNING 2025-05-21 02:02:31,937 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+ERROR 2025-05-21 02:02:33,087 log Internal Server Error: /attendance/summary/1/transfer/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "E:\LTWNhom06_1\LTWNhom06_1\hr_management\attendance\views.py", line 835, in transfer_to_payroll
+    return render(request, 'attendance/transfer_to_payroll.html', context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python39\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'attendance_summary_view' not found. 'attendance_summary_view' is not a valid view function or pattern name.
+ERROR 2025-05-21 02:02:33,097 basehttp "GET /attendance/summary/1/transfer/ HTTP/1.1" 500 200520
+INFO 2025-05-21 02:05:21,802 autoreload E:\LTWNhom06_1\LTWNhom06_1\hr_management\attendance\views.py changed, reloading.
+INFO 2025-05-21 02:05:23,936 autoreload Watching for file changes with StatReloader
+INFO 2025-05-21 02:05:26,128 basehttp "GET /attendance/summary/ HTTP/1.1" 200 15776
+INFO 2025-05-21 02:05:27,228 basehttp "GET /attendance/summary/1/ HTTP/1.1" 200 13661
+WARNING 2025-05-21 02:05:27,296 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 02:05:28,234 basehttp "GET /attendance/summary/1/transfer/ HTTP/1.1" 200 12303
+INFO 2025-05-21 02:05:32,668 basehttp "POST /attendance/summary/1/transfer/ HTTP/1.1" 302 0
+INFO 2025-05-21 02:05:32,915 basehttp "GET /attendance/summary/1/ HTTP/1.1" 200 14503
+WARNING 2025-05-21 02:05:32,988 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 02:07:14,837 basehttp "GET /attendance/summary/ HTTP/1.1" 200 15776
+INFO 2025-05-21 02:07:16,762 basehttp "GET /attendance/summary/1/ HTTP/1.1" 200 13637
+WARNING 2025-05-21 02:07:16,813 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 02:07:22,880 basehttp "GET /attendance/summary/ HTTP/1.1" 200 15776
+INFO 2025-05-21 02:07:24,852 basehttp "GET /attendance/summary/edit/1/ HTTP/1.1" 200 11830
+INFO 2025-05-21 02:07:26,890 basehttp "POST /attendance/summary/edit/1/ HTTP/1.1" 302 0
+INFO 2025-05-21 02:07:26,909 basehttp "GET /attendance/summary/ HTTP/1.1" 200 16212
+INFO 2025-05-21 02:07:27,946 basehttp "GET /attendance/summary/1/ HTTP/1.1" 200 13637
+WARNING 2025-05-21 02:07:28,000 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 02:07:32,120 basehttp "GET /attendance/summary/ HTTP/1.1" 200 15776
+INFO 2025-05-21 02:07:35,383 basehttp "GET /attendance/summary/1/delete/ HTTP/1.1" 302 0
+INFO 2025-05-21 02:07:35,399 basehttp "GET /attendance/summary/ HTTP/1.1" 200 15261
+INFO 2025-05-21 02:07:47,602 basehttp "POST /attendance/summary/add/ HTTP/1.1" 302 0
+INFO 2025-05-21 02:07:47,623 basehttp "GET /attendance/summary/ HTTP/1.1" 200 16205
+INFO 2025-05-21 02:07:49,219 basehttp "GET /attendance/summary/2/ HTTP/1.1" 200 13661
+WARNING 2025-05-21 02:07:49,270 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 02:08:07,207 autoreload E:\LTWNhom06_1\LTWNhom06_1\hr_management\attendance\views.py changed, reloading.
+INFO 2025-05-21 02:08:12,816 autoreload Watching for file changes with StatReloader
+INFO 2025-05-21 02:08:17,500 basehttp "GET /attendance/summary/2/transfer/ HTTP/1.1" 200 12303
+INFO 2025-05-21 02:08:23,603 basehttp "POST /attendance/summary/2/transfer/ HTTP/1.1" 200 12804
+INFO 2025-05-21 02:08:37,885 basehttp "GET /attendance/summary/2/ HTTP/1.1" 200 13637
+WARNING 2025-05-21 02:08:37,927 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 02:08:51,985 basehttp "GET /attendance/summary/2/ HTTP/1.1" 200 13637
+WARNING 2025-05-21 02:08:52,020 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 02:08:53,328 basehttp "GET /attendance/summary/ HTTP/1.1" 200 15776
+INFO 2025-05-21 02:08:54,873 basehttp "GET /attendance/summary/2/ HTTP/1.1" 200 13637
+WARNING 2025-05-21 02:08:54,912 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 02:09:02,329 basehttp "GET /attendance/summary/2/delete/ HTTP/1.1" 302 0
+INFO 2025-05-21 02:09:02,346 basehttp "GET /attendance/summary/ HTTP/1.1" 200 15261
+INFO 2025-05-21 02:09:14,502 basehttp "POST /attendance/summary/add/ HTTP/1.1" 302 0
+INFO 2025-05-21 02:09:14,520 basehttp "GET /attendance/summary/ HTTP/1.1" 200 16205
+INFO 2025-05-21 02:09:16,008 basehttp "GET /attendance/summary/3/ HTTP/1.1" 200 13661
+WARNING 2025-05-21 02:09:16,084 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 02:09:18,098 basehttp "GET /attendance/summary/3/transfer/ HTTP/1.1" 200 12303
+INFO 2025-05-21 02:09:21,280 basehttp "POST /attendance/summary/3/transfer/ HTTP/1.1" 200 12804
+INFO 2025-05-21 02:12:13,718 autoreload E:\LTWNhom06_1\LTWNhom06_1\hr_management\attendance\views.py changed, reloading.
+INFO 2025-05-21 02:12:20,665 autoreload Watching for file changes with StatReloader
+INFO 2025-05-21 02:12:25,131 basehttp "GET /attendance/summary/3/ HTTP/1.1" 200 13637
+WARNING 2025-05-21 02:12:25,213 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 02:12:27,688 basehttp "GET /attendance/summary/ HTTP/1.1" 200 15776
+INFO 2025-05-21 02:12:30,238 basehttp "GET /attendance/summary/3/delete/ HTTP/1.1" 302 0
+INFO 2025-05-21 02:12:30,257 basehttp "GET /attendance/summary/ HTTP/1.1" 200 15261
+INFO 2025-05-21 02:12:44,568 basehttp "POST /attendance/summary/add/ HTTP/1.1" 302 0
+INFO 2025-05-21 02:12:44,584 basehttp "GET /attendance/summary/ HTTP/1.1" 200 16205
+INFO 2025-05-21 02:12:46,250 basehttp "GET /attendance/summary/4/ HTTP/1.1" 200 13661
+WARNING 2025-05-21 02:12:46,335 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 02:12:48,075 basehttp "GET /attendance/summary/4/transfer/ HTTP/1.1" 200 12303
+INFO 2025-05-21 02:12:49,749 basehttp "POST /attendance/summary/4/transfer/ HTTP/1.1" 302 0
+INFO 2025-05-21 02:12:49,863 basehttp "GET /attendance/summary/4/ HTTP/1.1" 200 14138
+WARNING 2025-05-21 02:12:49,911 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 02:12:54,442 basehttp "GET /attendance/summary/ HTTP/1.1" 200 15776
+INFO 2025-05-21 02:12:56,204 basehttp "GET /attendance/summary/4/ HTTP/1.1" 200 13637
+WARNING 2025-05-21 02:12:56,259 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 02:13:03,599 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 14494
+INFO 2025-05-21 02:13:05,595 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 14494
+INFO 2025-05-21 02:13:07,492 basehttp "GET /attendance/work-shifts/ HTTP/1.1" 200 12711
+INFO 2025-05-21 02:13:08,517 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 14494
+INFO 2025-05-21 02:13:08,926 basehttp "GET /attendance/summary/ HTTP/1.1" 200 15776
+INFO 2025-05-21 02:13:11,143 basehttp "GET /attendance/summary/4/ HTTP/1.1" 200 13637
+WARNING 2025-05-21 02:13:11,187 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 02:13:12,838 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 14494
+INFO 2025-05-21 02:13:13,923 basehttp "GET /attendance/attendance-details/view/1/ HTTP/1.1" 200 51615
+INFO 2025-05-21 02:13:27,453 basehttp "GET /attendance/summary/ HTTP/1.1" 200 15776
+INFO 2025-05-21 02:13:28,792 basehttp "GET /attendance/summary/4/ HTTP/1.1" 200 13637
+WARNING 2025-05-21 02:13:28,842 basehttp "GET /static/js/attendance.js HTTP/1.1" 404 1807
+INFO 2025-05-21 02:13:34,899 basehttp "GET /attendance/daily-attendance/ HTTP/1.1" 200 14720
+INFO 2025-05-21 02:13:36,800 basehttp "GET /attendance/attendance-details/ HTTP/1.1" 200 14494
