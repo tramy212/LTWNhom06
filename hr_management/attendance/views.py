@@ -10,7 +10,6 @@ from .utils import get_attendance_summary_data
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 import json
-from django.shortcuts import redirect
 from django.contrib import messages
 from .models import AttendanceRecord
 from django.http import JsonResponse
@@ -120,7 +119,7 @@ def work_shift_delete(request, id):
     work_shift = get_object_or_404(WorkShift, id=id)
     work_shift.delete()
     messages.success(request, f"Đã xóa ca làm việc {work_shift.name} thành công!")
-    return redirect('work_shift_list')
+    return redirect('attendance:work_shift_list')  # Thêm namespace 'attendance'
 
 def attendance_detail_list(request):
     attendance_records = AttendanceRecord.objects.all()
@@ -216,7 +215,7 @@ def attendance_detail_delete(request, id):
     attendance_record = get_object_or_404(AttendanceRecord, id=id)
     attendance_record.delete()
     messages.success(request, "Đã xóa bảng chấm công chi tiết thành công!")
-    return redirect('attendance_detail_list')
+    return redirect('attendance:attendance_detail_list')  # Thêm namespace 'attendance'
 
 @login_required
 def attendance_detail_view(request, id):
@@ -653,16 +652,28 @@ def attendance_summary_form(request, id=None):
             attendance_summary.attendance_records.set(attendance_records_selected)
             messages.success(request, "Cập nhật bảng chấm công tổng hợp thành công!")
         else:
+            # Tính start_date và end_date từ attendance_records
+            if attendance_records_selected:
+                start_date = min(record.start_date for record in attendance_records_selected)
+                end_date = max(record.end_date for record in attendance_records_selected)
+            else:
+                # Nếu không có attendance_records, đặt giá trị mặc định
+                start_date = datetime.now().date()
+                end_date = start_date
+
             # Thêm bảng chấm công tổng hợp
             attendance_summary = AttendanceSummary.objects.create(
                 name=name,
                 position=position,
-                date_range=''  # Cần cập nhật logic để tính date_range nếu cần
+                start_date=start_date,
+                end_date=end_date,
+                month=start_date.month,
+                year=start_date.year
             )
             attendance_summary.attendance_records.set(attendance_records_selected)
             messages.success(request, "Thêm bảng chấm công tổng hợp thành công!")
 
-        return redirect('attendance:attendance_summary')  # Sửa ở đây
+        return redirect('attendance:attendance_summary')
 
     return render(request, 'attendance/attendance_summary_form.html', {
         'attendance_summary': attendance_summary,
@@ -716,7 +727,7 @@ def attendance_summary_delete(request, id):
     attendance_summary = get_object_or_404(AttendanceSummary, id=id)
     attendance_summary.delete()
     messages.success(request, "Đã xóa bảng chấm công tổng hợp thành công!")
-    return redirect('attendance_summary')
+    return redirect('attendance:attendance_summary')  # Thêm namespace 'attendance'
 
 @login_required
 def transfer_to_payroll(request, summary_id):
