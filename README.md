@@ -47,12 +47,16 @@ Xuất báo cáo lương theo tháng dưới dạng PDF.
 Phân quyền người dùng: Xác thực tài khoản và phân quyền truy cập chức năng hệ thống.
 
 📷 GIAO DIỆN
+
 Trang chủ:
 ![image](https://github.com/user-attachments/assets/9ad725b1-b288-4050-a804-5b59a0e900df)
+
 Quản lý Thông tin nhân sự:
 ![image](https://github.com/user-attachments/assets/160a7e9a-bbe0-4ffb-ba60-f89288d6371d)
+
 Quản lý Chấm công
 ![image](https://github.com/user-attachments/assets/72502b39-ba87-467f-a439-eae6a7116447)
+
 Quán lý Tiền lương
 ![image](https://github.com/user-attachments/assets/2410fcd3-bbfd-4135-a78a-fb9ad3c6ef9d)
 
