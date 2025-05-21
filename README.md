@@ -2,7 +2,11 @@
 
 
 Ứng dụng Human Resource Management là một hệ thống web giúp các doanh nghiệp quản lý thông tin nhân viên một cách hiệu quả. Ứng dụng hỗ trợ các chức năng thiết yếu như quản lý hồ sơ nhân viên, hợp đồng lao động, chấm công và tính lương hàng tháng.
+
+
 🚀 CÔNG NGHỆ SỬ DỤNG
+
+
 🔧 BACKEND
 Python (Django): Framework chính để xây dựng ứng dụng theo mô hình MVC, hỗ trợ routing, ORM và các công cụ quản lý.
 
@@ -13,6 +17,8 @@ SQLite: Cơ sở dữ liệu nhẹ, lý tưởng cho môi trường phát triể
 ReportLab / WeasyPrint: Dùng để tạo và xuất báo cáo lương dưới dạng PDF.
 
 Authentication Middleware: Xác thực và phân quyền người dùng khi sử dụng hệ thống.
+
+
 
 🎨 FRONTEND
 HTML / CSS / JavaScript: Tạo giao diện người dùng và xử lý các tương tác cơ bản.
