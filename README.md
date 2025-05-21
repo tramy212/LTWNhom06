@@ -1,4 +1,6 @@
 👨‍💼 HUMAN RESOURCE MANAGEMENT – WEB APP FOR EMPLOYEE ADMINISTRATION
+
+
 Ứng dụng Human Resource Management là một hệ thống web giúp các doanh nghiệp quản lý thông tin nhân viên một cách hiệu quả. Ứng dụng hỗ trợ các chức năng thiết yếu như quản lý hồ sơ nhân viên, hợp đồng lao động, chấm công và tính lương hàng tháng.
 🚀 CÔNG NGHỆ SỬ DỤNG
 🔧 BACKEND
